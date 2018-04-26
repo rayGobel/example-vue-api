@@ -6,10 +6,11 @@
       <!-- list of company will goes here -->
       <div class="row">
         <div class="col-sm">
-          <most-active-company />
+          <!-- most active company -->
+          <company-list title="Most Active Company" :listOfCompany="mostActiveCompany" />
         </div>
         <div class="col-sm">
-          <gainers-company />
+          <company-list title="Gainers Company" :listOfCompany="gainersCompany" />
         </div>
       </div>
     </div>
@@ -17,13 +18,27 @@
 </template>
 
 <script>
-import MostActiveCompany from './dashboard/MostActiveCompany'
-import GainersCompany from './dashboard/GainersCompany'
+import CompanyList from './dashboard/OverviewCompanyTemplate'
 
 export default {
   components: {
-    MostActiveCompany,
-    GainersCompany
+    CompanyList
+  },
+  data () {
+    return {
+      mostActiveCompany: [
+        { symbol: 'TIME', companyName: 'Time Inc.' },
+        { symbol: 'MARA', companyName: 'Marathon Patent Group Inc.' },
+        { symbol: 'DPW', companyName: 'DPW Holdings Inc.' },
+        { symbol: 'SQ', companyName: 'Square Inc. Class A' }
+      ],
+      gainersCompany: [
+        { symbol: 'TEUM', companyName: 'Parateum Corporation' },
+        { symbol: 'NXTD', companyName: 'NXT-ID Inc.' },
+        { symbol: 'CPRX', companyName: 'Catalyst Pharmaceuticals Inc.' },
+        { symbol: 'EARS', companyName: 'Auris Medical Holding AG' }
+      ]
+    }
   }
 }
 </script>

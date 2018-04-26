@@ -7,10 +7,14 @@
       <div class="row">
         <div class="col-sm">
           <!-- most active company -->
-          <company-list title="Most Active Company" :listOfCompany="mostActiveCompany" />
+          <company-list title="Most Active Company"
+                        v-on:loadMoreClicked="loadMostActiveCompany"
+                        :listOfCompany="mostActiveCompany" />
         </div>
         <div class="col-sm">
-          <company-list title="Gainers Company" :listOfCompany="gainersCompany" />
+          <company-list title="Gainers Company"
+                        v-on:loadMoreClicked="loadGainersCompany"
+                        :listOfCompany="gainersCompany" />
         </div>
       </div>
     </div>
@@ -38,6 +42,18 @@ export default {
         { symbol: 'CPRX', companyName: 'Catalyst Pharmaceuticals Inc.' },
         { symbol: 'EARS', companyName: 'Auris Medical Holding AG' }
       ]
+    }
+  },
+  methods: {
+    loadGainersCompany () {
+      // Simply append with redundant data
+      let moreData = this.gainersCompany.slice()
+      this.gainersCompany.push(...moreData)
+    },
+    loadMostActiveCompany () {
+      // Simply append with redundant data
+      let moreData = this.mostActiveCompany.slice()
+      this.mostActiveCompany.push(...moreData)
     }
   }
 }

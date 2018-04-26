@@ -8,7 +8,10 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            <router-link class="nav-link" to="/" >Home </router-link>
+          </li>
+          <li class="nav-item active">
+            <router-link class="nav-link" to="/company-list" >Company Lists </router-link>
           </li>
         </ul>
         <form class="form-inline mt-2 mt-md-0">
@@ -19,7 +22,7 @@
     </nav>
 
     <div class="container" role="main">
-      <dashboard></dashboard>
+      <router-view></router-view>
     </div>
 
   </div>

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a class="navbar-brand" href="#">Fixed navbar</a>
+      <a class="navbar-brand" href="#">{{ title }}</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -9,12 +9,6 @@
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
             <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
           </li>
         </ul>
         <form class="form-inline mt-2 mt-md-0">
@@ -25,21 +19,27 @@
     </nav>
 
     <div class="container" role="main">
-    <div class="jumbotron">
-      <h1>Navbar example</h1>
-      <p class="lead">This example is a quick exercise to illustrate how fixed to top navbar works. As you scroll, it will remain fixed to the top of your browser's viewport.</p>
-      <a class="btn btn-lg btn-primary" href="../../components/navbar/" role="button">View navbar docs »</a>
-    </div>
+      <dashboard></dashboard>
     </div>
 
   </div>
 </template>
 
 <script>
+import Dashboard from './components/Dashboard'
+
 export default {
   name: 'App',
   mounted () {
     console.log('This is an app built with bootstrap and vue.js')
+  },
+  data () {
+    return {
+      title: 'TradingInfo App'
+    }
+  },
+  components: {
+    Dashboard
   }
 }
 </script>

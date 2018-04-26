@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import IEXService from './../api/iextrading'
 import CompanyList from './dashboard/OverviewCompanyTemplate'
 
 export default {
@@ -30,30 +31,34 @@ export default {
   },
   data () {
     return {
-      mostActiveCompany: [
-        { symbol: 'TIME', companyName: 'Time Inc.' },
-        { symbol: 'MARA', companyName: 'Marathon Patent Group Inc.' },
-        { symbol: 'DPW', companyName: 'DPW Holdings Inc.' },
-        { symbol: 'SQ', companyName: 'Square Inc. Class A' }
-      ],
-      gainersCompany: [
-        { symbol: 'TEUM', companyName: 'Parateum Corporation' },
-        { symbol: 'NXTD', companyName: 'NXT-ID Inc.' },
-        { symbol: 'CPRX', companyName: 'Catalyst Pharmaceuticals Inc.' },
-        { symbol: 'EARS', companyName: 'Auris Medical Holding AG' }
-      ]
+      mostActiveCompany: [],
+      gainersCompany: []
     }
   },
+  mounted () {
+    this.loadMostActiveCompany()
+    this.loadGainersCompany()
+  },
   methods: {
-    loadGainersCompany () {
-      // Simply append with redundant data
-      let moreData = this.gainersCompany.slice()
-      this.gainersCompany.push(...moreData)
-    },
     loadMostActiveCompany () {
-      // Simply append with redundant data
-      let moreData = this.mostActiveCompany.slice()
-      this.mostActiveCompany.push(...moreData)
+      IEXService.getMostActiveCompany()
+        .then(company => {
+          this.mostActiveCompany = company
+        })
+        .catch(err => {
+          console.log('An error has happened when: loadMostActiveCompany()')
+          console.log(err)
+        })
+    },
+    loadGainersCompany () {
+      IEXService.getGainersCompany()
+        .then(company => {
+          this.gainersCompany = company
+        })
+        .catch(err => {
+          console.log('An error has happened when: loadGainersCompany()')
+          console.log(err)
+        })
     }
   }
 }

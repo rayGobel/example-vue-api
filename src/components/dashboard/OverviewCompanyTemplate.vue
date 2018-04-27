@@ -6,12 +6,22 @@
         <li class="list-group-item"
             v-for="company in listOfCompany"
             :key="company.symbol">
-          <p class="lead">
-            <router-link :to="`/company/${company.symbol}`">
-              {{ company.symbol }}
-            </router-link>
-          </p>
-          <p><small>{{ company.companyName }}</small></p>
+          <div class="row">
+            <div class="col-sm">
+              <h3>
+              <router-link :to="`/company/${company.symbol}`">
+                {{ company.symbol }}
+              </router-link>
+              </h3>
+              <p><small>{{ company.companyName }}</small></p>
+            </div>
+            <div class="col-sm">
+              <h3>{{ company.latestPrice }}</h3>
+              <p class="muted" v-bind:class="{ 'positive': company.change > 0, 'negative': company.change <= 0 }">
+              {{ company.change }} ( {{ (company.change * 100) | shorten }}% )
+              </p>
+            </div>
+          </div>
         </li>
       </ul>
       <div style="margin-top: 2em"></div>
@@ -35,7 +45,20 @@ export default {
         return ''
       }
       return text.toUpperCase()
+    },
+    shorten (number) {
+      return number.toFixed(2)
     }
   }
 }
 </script>
+
+<style>
+.positive {
+  color: green
+}
+
+.negative {
+  color: red
+}
+</style>

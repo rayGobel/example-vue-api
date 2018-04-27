@@ -2,17 +2,21 @@
   <div class="company-list card">
     <div class="card-body">
       <h2>Company Lists</h2>
-      <table class="table table-sm">
+      <table class="table table-sm table-striped">
         <thead>
           <tr>
-            <th scope="col">Symbol</th>
-            <th scope="col">Date</th>
+            <th scope="col" class="w-25">Symbol</th>
+            <th scope="col" class="w-25">Date</th>
             <th scope="col">Name</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(company, index) in filteredCompanyList" :key="index">
-            <td scope="row">{{ company.symbol }}</td>
+            <td scope="row">
+              <router-link :to="`/company/${company.symbol}`">
+                {{ company.symbol }}
+              </router-link>
+            </td>
             <td>{{ company.date }}</td>
             <td>{{ company.name }}</td>
           </tr>
@@ -34,54 +38,13 @@
 </template>
 
 <script>
+const IEXService = require('./../api/iextrading')
+
 export default {
   data () {
     return {
       displayedCompany: 'A',
-      companyList: [
-        {
-          'symbol': 'A',
-          'name': 'AGILENT TECHNOLOGIES INC',
-          'date': '2017-04-19',
-          'isEnabled': true
-        },
-        {
-          'symbol': 'AA',
-          'name': 'ALCOA CORP',
-          'date': '2017-04-19',
-          'isEnabled': true
-        },
-        {
-          'symbol': 'BAC-Y',
-          'name': 'Bank of America Corporation Depositary Shares Series Y',
-          'date': '2018-04-25',
-          'isEnabled': true
-        },
-        {
-          'symbol': 'BAF',
-          'name': 'BlackRock Municipal Income Investment Quality Trust',
-          'date': '2018-04-25',
-          'isEnabled': true
-        },
-        {
-          'symbol': 'BAH',
-          'name': 'Booz Allen Hamilton Holding Corporation',
-          'date': '2018-04-25',
-          'isEnabled': true
-        },
-        {
-          'symbol': 'MMYT',
-          'name': 'MakeMyTrip Limited',
-          'date': '2018-04-25',
-          'isEnabled': true
-        },
-        {
-          'symbol': 'MN',
-          'name': 'Manning & Napier Inc. Class A',
-          'date': '2018-04-25',
-          'isEnabled': true
-        }
-      ]
+      companyList: []
     }
   },
   computed: {
@@ -100,6 +63,12 @@ export default {
     filteredCompanyList () {
       return this.companyList.filter((company) => company.symbol.slice(0, 1) === this.displayedCompany)
     }
+  },
+  mounted () {
+    IEXService.getCompanyList()
+      .then(company => {
+        this.companyList = company
+      })
   },
   methods: {
     paginationClicked (event) {

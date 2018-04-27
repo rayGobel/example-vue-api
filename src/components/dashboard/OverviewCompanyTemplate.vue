@@ -6,7 +6,11 @@
         <li class="list-group-item"
             v-for="company in listOfCompany"
             :key="company.symbol">
-          <p class="lead">{{ company.symbol }}</p>
+          <p class="lead">
+            <router-link :to="`/company/${company.symbol}`">
+              {{ company.symbol }}
+            </router-link>
+          </p>
           <p><small>{{ company.companyName }}</small></p>
         </li>
       </ul>

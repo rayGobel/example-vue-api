@@ -1,7 +1,11 @@
 <template>
   <div class="dashboard-component card">
     <div class="card-body">
-      <h2>This is Dashboard component</h2>
+      <h2>Dashboard</h2>
+      <p>
+      Data is provided for free by <a href="https://iextrading.com/developer">IEX</a>.
+      View <a href="https://iextrading.com/api-terms/">IEX's Terms of use</a>
+      </p>
 
       <!-- list of company will goes here -->
       <div class="row">

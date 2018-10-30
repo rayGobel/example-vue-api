@@ -2,6 +2,11 @@
 
 > Vue.js with bootstrap 4
 
+This is an example application build with [IEX Trading API]( https://iextrading.com/ )
+alongside Vue.js. Built from basic Vue.js webpack template.
+
+[IEX Trading API Terms of use](https://iextrading.com/api-terms/)
+
 ## Build Setup
 
 ``` bash
